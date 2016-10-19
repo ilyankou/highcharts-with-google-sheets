@@ -1,10 +1,14 @@
 # highcharts-scatter-from-google-sheets
 sample
 
-## demo
+## Chart demo
 https://jackdougherty.github.io/highcharts-scatter-from-google-sheets/
 
-## Google Sheet
+## Published Google Sheet template
+https://docs.google.com/spreadsheets/d/1EfNavL8tH_M86V5FQCUfpuqkvd5WpzHZRH9bTywZHdM/edit#gid=0
+
+## TO DO
+- improve the GSheet data setup to match series values as expected by HighCharts
 
 ## based on
 - http://www.highcharts.com/docs/working-with-data/data-module
