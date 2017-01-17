@@ -1,8 +1,8 @@
-# highcharts-scatter-from-google-sheets
+# highcharts-scatter-with-google-sheets
 sample
 
 ## Chart demo
-https://jackdougherty.github.io/highcharts-scatter-from-google-sheets/
+https://jackdougherty.github.io/highcharts-scatter-with-google-sheets/
 
 ## Published Google Sheet template
 https://docs.google.com/spreadsheets/d/1EfNavL8tH_M86V5FQCUfpuqkvd5WpzHZRH9bTywZHdM/edit#gid=0
@@ -18,4 +18,4 @@ https://docs.google.com/spreadsheets/d/1EfNavL8tH_M86V5FQCUfpuqkvd5WpzHZRH9bTywZ
 - http://jsfiddle.net/gh/get/jquery/1.7.2/highslide-software/highcharts.com/tree/master/samples/highcharts/data/google-spreadsheet/
 
 ## Credits
-http://www.highcharts.com (free for non-commercial use; license?)
+http://www.highcharts.com - free for personal website, a school site, or non-profit organizations; commercial use requires a license
