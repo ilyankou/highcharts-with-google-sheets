@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-  	<title>Scatter Chart with Google Sheets</title>
+  	<title>Line Chart with Google Sheets</title>
   	<meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta charset="utf-8">
     <!-- load jQuery -->
@@ -20,14 +20,13 @@
   $(function() {
   $('#container').highcharts({
     chart: {
-      type: 'scatter',
-      zoomType: 'xy'
+      type: 'line'
     },
     title: {
-      text: 'Insert title'
+      text: 'Highcharts line chart from Google Sheets'
     },
     data: {
-          googleSpreadsheetKey: '1EfNavL8tH_M86V5FQCUfpuqkvd5WpzHZRH9bTywZHdM'
+          googleSpreadsheetKey: '1eGnc81p7-Rn7O2LMcOfSIht-Z9NYU-KAi9vJPjf6SWA'
     }
   });
 });
