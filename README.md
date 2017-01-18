@@ -11,9 +11,15 @@ http://www.highcharts.com - free for personal website, a school site, or non-pro
 ## Scatter chart
 - demo https://jackdougherty.github.io/highcharts-with-google-sheets/scatter.html
 - Google Sheet https://docs.google.com/spreadsheets/d/1EfNavL8tH_M86V5FQCUfpuqkvd5WpzHZRH9bTywZHdM/edit#gid=0
+- TO DO: improve data format and display
 
-## TO DO
-- improve the GSheet data setup to match series values as expected by HighCharts
+## Bubble chart (partially working)
+- demo https://jackdougherty.github.io/highcharts-with-google-sheets/bubble.html
+- Google Sheet https://docs.google.com/spreadsheets/d/1fYJOd-2agLPg38qhblS8qoZGWGkKcK-3uTsMpf37Hys/edit#gid=0
+
+- Problem: How should I format data in Google Sheet to display items in tooltips?
+- Compare with hard-coded data demo https://jackdougherty.github.io/highcharts-with-google-sheets/bubble2.html
+
 
 ## Code resources
 - http://www.highcharts.com/docs/working-with-data/data-module

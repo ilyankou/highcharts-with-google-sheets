@@ -18,13 +18,13 @@
 <div id="container" style="width:100%; height:400px;"></div>
 <script>
   $(function() {
-  $('#container').highcharts({
+  Highcharts.chart('container',{
     chart: {
       type: 'scatter',
       zoomType: 'xy'
     },
     title: {
-      text: 'Insert title'
+      text: 'Highcharts scatter chart from Google Sheets'
     },
     data: {
           googleSpreadsheetKey: '1EfNavL8tH_M86V5FQCUfpuqkvd5WpzHZRH9bTywZHdM'
