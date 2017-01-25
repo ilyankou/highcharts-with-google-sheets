@@ -22,17 +22,26 @@
 
       chart: {
         type: 'bubble',
+        zoomType: 'xy'
       },
 
-      tooltip: {
-        useHTML: true,
-        headerFormat: '<table>',
-        pointFormat: '<tr><th colspan="2"><h3>{point.country}</h3></th></tr>' +
-        '<tr><th>Fat intake:</th><td>{point.x}g</td></tr>' +
-        '<tr><th>Sugar intake:</th><td>{point.y}g</td></tr>' +
-        '<tr><th>Obesity (adults):</th><td>{point.z}%</td></tr>',
-        footerFormat: '</table>',
-        followPointer: true
+      data: {
+        // insert the key from your public Google Sheet
+        googleSpreadsheetKey: '1fYJOd-2agLPg38qhblS8qoZGWGkKcK-3uTsMpf37Hys',
+        // insert Google Sheet column headers (x, y, z, name, country) to match column numbers (0, 1, 2, 3, 4)
+        seriesMapping: [{x: 0, y: 1, z: 2, name: 3, country: 4}],
+      },
+
+      xAxis: {
+        title: {
+          text: 'Insert x-axis label'
+        }
+      },
+
+      yAxis: {
+        title: {
+          text: 'Insert y-axis label'
+        }
       },
 
       plotOptions: {
@@ -44,14 +53,20 @@
         }
       },
 
-      data: {
-            googleSpreadsheetKey: '1fYJOd-2agLPg38qhblS8qoZGWGkKcK-3uTsMpf37Hys',
-            // here, we specify which property corresponds to which column
-            seriesMapping: [{x: 0, y: 1, z: 2, name: 3, country: 4}],
-      },
+      // insert data column headers (such as .country) and text and labels
+      tooltip: {
+        useHTML: true,
+        headerFormat: '<table>',
+        pointFormat: '<tr><th colspan="2"><h3>{point.country}</h3></th></tr>' +
+        '<tr><th>Fat intake:</th><td>{point.x}g</td></tr>' +
+        '<tr><th>Sugar intake:</th><td>{point.y}g</td></tr>' +
+        '<tr><th>Obesity (adults):</th><td>{point.z}%</td></tr>',
+        footerFormat: '</table>',
+        followPointer: true
+      }
 
+    });
   });
-});
-</script>
+  </script>
 </body>
 </html>
