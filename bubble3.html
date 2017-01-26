@@ -15,7 +15,7 @@
   <script src="https://code.highcharts.com/modules/exporting.js"></script>
 </head>
 <body>
-  <div id="container" style="width:100%; height:400px;"></div>
+  <div id="container" style="width:100%; height:500px;"></div>
   <script>
   $(function () {
     Highcharts.chart('container', {
@@ -30,15 +30,15 @@
       },
 
       subtitle: {
-        text: 'View <a href="https://docs.google.com/spreadsheets/d/1fYJOd-2agLPg38qhblS8qoZGWGkKcK-3uTsMpf37Hys">data</a> from <a href="http://www.highcharts.com/demo/bubble">Highcharts demo</a>',
+        text: 'View <a href="https://docs.google.com/spreadsheets/d/1wh6nYrlou3VS2UMgP6wGrRl-bkB2UpY_g3gxqYYkgVw">data</a> from <a href="http://trendct.org/2016/05/06/wealth-and-grades-compare-connecticuts-school-districts/">TrendCT</a>',
         useHTML: true
       },
 
       data: {
         // insert the key from your public Google Sheet
-        googleSpreadsheetKey: '1fYJOd-2agLPg38qhblS8qoZGWGkKcK-3uTsMpf37Hys',
+        googleSpreadsheetKey: '1wh6nYrlou3VS2UMgP6wGrRl-bkB2UpY_g3gxqYYkgVw',
         // insert Google Sheet column headers (x, y, z...) to match column numbers (0, 1, 2...)
-        seriesMapping: [{x: 0, y: 1, z: 2, name: 3, country: 4}],
+        seriesMapping: [{x: 0, y: 1, z: 2, name: 3}],
       },
 
       legend: {
@@ -57,28 +57,24 @@
         }
       },
 
+      plotOptions: {
+        series: {
+          dataLabels: {
+            enabled: false
+          }
+        }
+      },
+
       // insert data column headers (such as .country) and text and labels
       tooltip: {
         useHTML: true,
         headerFormat: '<table>',
-        pointFormat: '<tr><th colspan="2"><h3>{point.country}</h3></th></tr>' +
-        '<tr><th>Fat intake:</th><td>{point.x}g</td></tr>' +
-        '<tr><th>Sugar intake:</th><td>{point.y}g</td></tr>' +
-        '<tr><th>Obesity (adults):</th><td>{point.z}%</td></tr>',
+        pointFormat: '<tr><th colspan="2"><h3>{point.name}</h3></th></tr>' +
+        '<tr><th>Median family income:</th><td>{point.x}</td></tr>' +
+        '<tr><th>Grades above/below average:</th><td>{point.y}</td></tr>' ,
         footerFormat: '</table>',
-        followPointer: true,
-        hideDelay: 50
-      },
-
-      plotOptions: {
-        series: {
-          dataLabels: {
-            enabled: true,
-            format: '{point.name}'
-          },
-          stickyTracking: false,
-        }
-      },
+        followPointer: true
+      }
 
     });
   });
