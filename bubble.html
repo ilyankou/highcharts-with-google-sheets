@@ -32,7 +32,8 @@
         '<tr><th>Sugar intake:</th><td>{point.y}g</td></tr>' +
         '<tr><th>Obesity (adults):</th><td>{point.z}%</td></tr>',
         footerFormat: '</table>',
-        followPointer: true
+        followPointer: true,
+        hideDelay: 100
       },
 
       plotOptions: {
@@ -40,7 +41,8 @@
           dataLabels: {
             enabled: true,
             format: '{point.name}'
-          }
+          },
+          stickyTracking: false,
         }
       },
 
