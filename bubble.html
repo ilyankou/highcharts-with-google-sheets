@@ -57,15 +57,6 @@
         }
       },
 
-      plotOptions: {
-        series: {
-          dataLabels: {
-            enabled: true,
-            format: '{point.name}'
-          }
-        }
-      },
-
       // insert data column headers (such as .country) and text and labels
       tooltip: {
         useHTML: true,
@@ -75,8 +66,19 @@
         '<tr><th>Sugar intake:</th><td>{point.y}g</td></tr>' +
         '<tr><th>Obesity (adults):</th><td>{point.z}%</td></tr>',
         footerFormat: '</table>',
-        followPointer: true
-      }
+        followPointer: true,
+        hideDelay: 50
+      },
+
+      plotOptions: {
+        series: {
+          dataLabels: {
+            enabled: true,
+            format: '{point.name}'
+          },
+          stickyTracking: false,
+        }
+      },
 
     });
   });
