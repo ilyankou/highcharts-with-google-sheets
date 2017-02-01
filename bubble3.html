@@ -17,6 +17,14 @@
 <body>
   <div id="container" style="width:100%; height:500px;"></div>
   <script>
+
+  function comma(val) {
+      while (/(\d+)(\d{3})/.test(val.toString())) {
+          val = val.toString().replace(/(\d+)(\d{3})/, '$1' + ',' + '$2');
+      }
+      return val;
+  }
+
   $(function () {
     Highcharts.chart('container', {
 
@@ -61,19 +69,22 @@
         series: {
           dataLabels: {
             enabled: false
-          }
+          },
+          stickyTracking: false
         }
       },
 
       // insert data column headers (such as .country) and text and labels
       tooltip: {
         useHTML: true,
-        headerFormat: '<table>',
-        pointFormat: '<tr><th colspan="2"><h3>{point.name}</h3></th></tr>' +
-        '<tr><th>Median family income:</th><td>{point.x}</td></tr>' +
-        '<tr><th>Grades above/below average:</th><td>{point.y}</td></tr>' ,
-        footerFormat: '</table>',
-        followPointer: true
+        formatter: function() {
+          point = this.point;
+          return '<table><tr><th colspan="2"><h3>' + point.name + '</h3></th></tr>' +
+          '<tr><th>Median family income:</th><td>$' + comma(point.x) + '</td></tr>' +
+          '<tr><th>Grades above/below average:</th><td>' + point.y + '</td></tr></table>';
+        },
+        followPointer: true,
+        hideDelay: 50
       }
 
     });
