@@ -18,25 +18,6 @@
   <div id="container" style="width:100%; height:400px;"></div>
   <script>
 
-  function paintBubbles(data) {
-    colors = {
-      'Europe': 'rgba(100, 0, 0, 0.3)',
-      'North America': 'green',
-      'sPacific': 'yellow'
-    }
-
-    for (i = 0; i < data.series[0].data.length; i++) {
-      data.series[0].data[i].color = colors[data.series[0].data[i].category] || 'rgba(200, 200, 200, 0.2)';
-    }
-  }
-
-  function comma(val) {
-      while (/(\d+)(\d{3})/.test(val.toString())) {
-          val = val.toString().replace(/(\d+)(\d{3})/, '$1' + ',' + '$2');
-      }
-      return val;
-  }
-
   $(function () {
     Highcharts.chart('container', {
 
@@ -60,12 +41,13 @@
         // insert Google Sheet column headers (x, y, z...) to match column numbers (0, 1, 2...)
         seriesMapping: [{x: 0, y: 1, z: 2, name: 3, country: 4, category: 5}],
         complete: function(data) {
-          paintBubbles(data);
+          categoriesIntoSeries(data);
+          changeSeriesColors(data);
         }
       },
 
       legend: {
-        enabled: false
+        enabled: true
       },
 
       xAxis: {
@@ -80,15 +62,20 @@
         }
       },
 
-      // insert data column headers (such as .country) and text and labels
+      // Insert data column headers (such as .country) and text and labels
       tooltip: {
         useHTML: true,
         formatter: function() {
           point = this.point;
-          return '<table><tr><th colspan="2"><h3>' + point.country + '</h3></th></tr>' +
-          '<tr><th>Fat intake:</th><td>' + point.x + 'g</td></tr>' +
-          '<tr><th>Sugar intake:</th><td>' + point.y + 'g</td></tr>' +
-          '<tr><th>Obesity (adults):</th><td>' + point.z + '%</td></tr></table>'
+
+          html = '<table>';
+          html += '<tr><th colspan="2"><h3>' + point.country + '</h3></th></tr>';
+          html += '<tr><th>Fat intake:</th><td>' + point.x + 'g</td></tr>';
+          html += '<tr><th>Sugar intake:</th><td>' + point.y + 'g</td></tr>';
+          html += '<tr><th>Obesity (adults):</th><td>' + point.z + '%</td></tr>';
+          html += '</table>'
+
+          return html;
         },
         followPointer: true,
         hideDelay: 50
@@ -106,6 +93,60 @@
 
     });
   });
+
+  /**
+   * Here, all data is split into categories depending on the 'category' property
+   * Needed for correct legend display
+   */
+  function categoriesIntoSeries(data) {
+    rows = data.series[0].data;
+    data.series = [];
+
+    for (i = 0; i < rows.length; i++) {
+      cat = rows[i].category;
+      catExists = false;
+      for (j = 0; j < data.series.length; j++) {
+        if (data.series[j].name == cat) {
+          // Add a data point to existing series
+          data.series[j].data.push(rows[i]);
+          catExists = true;
+        }
+      }
+      if (!catExists) {
+        // When category is encountered for the first time, create a series
+        data.series.push({name: cat, data: [rows[i]]})
+      }
+    }
+  }
+
+
+  /**
+   * Customize colors of series
+   */
+  function changeSeriesColors(data) {
+    colors = {
+      'Europe': 'rgba(100, 0, 0, 0.3)', // to add transparency, define colors in rgba() model, where the last number is between 0 and 1 (opacity)
+      'North America': 'green',
+      'sPacific': 'yellow'    // example of a mistyped category
+    }
+
+    for (i = 0; i < data.series.length; i++) {
+      data.series[i].color = colors[data.series[i].name] || 'rgba(100, 100, 100, 0.2)';
+    }
+  }
+
+
+  /**
+   * Returns a string that contains digits of val split by comma evey 3 positions
+   * Example: 12345678 -> "12,345,678"
+   */
+  function comma(val) {
+      while (/(\d+)(\d{3})/.test(val.toString())) {
+          val = val.toString().replace(/(\d+)(\d{3})/, '$1' + ',' + '$2');
+      }
+      return val;
+  }
+
   </script>
 </body>
 </html>

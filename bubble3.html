@@ -18,12 +18,6 @@
   <div id="container" style="width:100%; height:500px;"></div>
   <script>
 
-  function comma(val) {
-      while (/(\d+)(\d{3})/.test(val.toString())) {
-          val = val.toString().replace(/(\d+)(\d{3})/, '$1' + ',' + '$2');
-      }
-      return val;
-  }
 
   $(function () {
     Highcharts.chart('container', {
@@ -46,7 +40,7 @@
         // insert the key from your public Google Sheet
         googleSpreadsheetKey: '1wh6nYrlou3VS2UMgP6wGrRl-bkB2UpY_g3gxqYYkgVw',
         // insert Google Sheet column headers (x, y, z...) to match column numbers (0, 1, 2...)
-        seriesMapping: [{x: 0, y: 1, z: 2, name: 3}],
+        seriesMapping: [{x: 0, y: 1, z: 2, name: 3}]
       },
 
       legend: {
@@ -79,9 +73,14 @@
         useHTML: true,
         formatter: function() {
           point = this.point;
-          return '<table><tr><th colspan="2"><h3>' + point.name + '</h3></th></tr>' +
-          '<tr><th>Median family income:</th><td>$' + comma(point.x) + '</td></tr>' +
-          '<tr><th>Grades above/below average:</th><td>' + point.y + '</td></tr></table>';
+
+          html = '<table>';
+          html += '<tr><th colspan="2"><h3>' + point.name + '</h3></th></tr>';
+          html += '<tr><th>Median family income:</th><td>$' + comma(point.x) + '</td></tr>';
+          html += '<tr><th>Grades above/below average:</th><td>' + point.y + '</td></tr>';
+          html += '</table>';
+
+          return html;
         },
         followPointer: true,
         hideDelay: 50
@@ -89,6 +88,19 @@
 
     });
   });
+
+
+  /**
+   * Returns a string that contains digits of val split by comma evey 3 positions
+   * Example: 12345678 -> "12,345,678"
+   */
+  function comma(val) {
+      while (/(\d+)(\d{3})/.test(val.toString())) {
+          val = val.toString().replace(/(\d+)(\d{3})/, '$1' + ',' + '$2');
+      }
+      return val;
+  }
+
   </script>
 </body>
 </html>

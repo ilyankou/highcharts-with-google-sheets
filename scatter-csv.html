@@ -19,78 +19,80 @@
   <script>
 
   $(function() {
-    Highcharts.chart('container', {
-      chart: {
-        type: 'scatter',
-        zoomType: 'xy'
-      },
+    $.get('data.csv', function(csv) {
+      Highcharts.chart('container', {
+        chart: {
+          type: 'scatter',
+          zoomType: 'xy'
+        },
 
-      title: {
-        text: 'Highcharts scatter chart from Google Sheets'
-      },
-
-      subtitle: {
-        text: 'View <a href="https://docs.google.com/spreadsheets/d/1EfNavL8tH_M86V5FQCUfpuqkvd5WpzHZRH9bTywZHdM">source data</a> from <a href="http://trendct.org/2016/05/06/wealth-and-grades-compare-connecticuts-school-districts/">TrendCT</a>',
-        useHTML: true
-      },
-
-      data: {
-        googleSpreadsheetKey: '1EfNavL8tH_M86V5FQCUfpuqkvd5WpzHZRH9bTywZHdM',
-        // insert Google Sheet column headers (x, y, name...) to match column numbers (0, 1, 2...)
-        seriesMapping: [{x: 0, y: 1, name: 2, category: 3}],
-        complete: function(data) {
-          categoriesIntoSeries(data);
-          changeSeriesColors(data);
-          changeSeriesMarkers(data)
-        }
-      },
-
-      legend: {
-        enabled: true
-      },
-
-      xAxis: {
         title: {
-          text: 'Insert x-axis label'
-        }
-      },
+          text: 'Highcharts scatter chart from Google Sheets'
+        },
 
-      yAxis: {
-        title: {
-          text: 'Insert y-axis label'
-        }
-      },
+        subtitle: {
+          text: 'View <a href="https://docs.google.com/spreadsheets/d/1EfNavL8tH_M86V5FQCUfpuqkvd5WpzHZRH9bTywZHdM">source data</a> from <a href="http://trendct.org/2016/05/06/wealth-and-grades-compare-connecticuts-school-districts/">TrendCT</a>',
+          useHTML: true
+        },
 
-      plotOptions: {
-          scatter: {
-              marker: {
-                  radius: 5,
-                  states: {
-                      hover: {
-                        enabled: true,
-                      }
-                  }
-              },
-              stickyTracking: false,
+        data: {
+          csv: csv,
+          // insert Google Sheet column headers (x, y, name...) to match column numbers (0, 1, 2...)
+          seriesMapping: [{x: 0, y: 1, name: 2, category: 3}],
+          complete: function(data) {
+            categoriesIntoSeries(data);
+            changeSeriesColors(data);
+            changeSeriesMarkers(data)
           }
-      },
+        },
 
-      tooltip: {
-          useHTML: true,
-          formatter: function() {
-            point = this.point;
+        legend: {
+          enabled: true
+        },
 
-            html = '<table>';
-            html += '<tr><th colspan="2"><h3>' + point.name + '</h3></th></tr>';
-            html += '<tr><th>Median family income:</th><td>$' + comma(point.x) + '</td></tr>';
-            html += '<tr><th>Grades above/below average:</th><td>' + point.y + '</td></tr>';
-            html += '</table>';
+        xAxis: {
+          title: {
+            text: 'Insert x-axis label'
+          }
+        },
 
-            return html;
-          },
-          followPointer: true,
-          hideDelay: 50
-      }
+        yAxis: {
+          title: {
+            text: 'Insert y-axis label'
+          }
+        },
+
+        plotOptions: {
+            scatter: {
+                marker: {
+                    radius: 5,
+                    states: {
+                        hover: {
+                          enabled: true,
+                        }
+                    }
+                },
+                stickyTracking: false,
+            }
+        },
+
+        tooltip: {
+            useHTML: true,
+            formatter: function() {
+              point = this.point;
+
+              html = '<table>';
+              html += '<tr><th colspan="2"><h3>' + point.name + '</h3></th></tr>';
+              html += '<tr><th>Median family income:</th><td>$' + comma(point.x) + '</td></tr>';
+              html += '<tr><th>Grades above/below average:</th><td>' + point.y + '</td></tr>';
+              html += '</table>';
+
+              return html;
+            },
+            followPointer: true,
+            hideDelay: 50
+        }
+      });
     });
   });
 
