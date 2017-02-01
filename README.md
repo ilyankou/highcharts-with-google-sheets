@@ -15,12 +15,6 @@ http://www.highcharts.com - free for personal website, a school site, or non-pro
   - in the first tab of a published Google Sheet, the first two columns may contain any labels, but layout must begin with numeric x, y data, then names, etc.
    - paste the googleSpreadsheetKey into the code, and modify other items mentioned in code comments
 
-- TO DO:
-  - improve tooltips to properly display name (perhaps use Bubble chart tooltip code?)
-  - understand which options are most appropriate in plotOptions -- see Highcharts demo http://www.highcharts.com/demo/scatter
-  - determine minimal code needed for functional template
-  - add function to properly display symbols and commas in financial data ($100,000) - see and credit Andrew? http://projects.ctmirror.org/tools/chart/charts/bubble_schools.html
-
 ## Bubble chart
 - demo https://jackdougherty.github.io/highcharts-with-google-sheets/bubble.html
 - Google Sheet https://docs.google.com/spreadsheets/d/1fYJOd-2agLPg38qhblS8qoZGWGkKcK-3uTsMpf37Hys/edit#gid=0
@@ -31,16 +25,12 @@ http://www.highcharts.com - free for personal website, a school site, or non-pro
 - instructions:
  - in the first tab of a published Google Sheet, the first three columns must be labeled x, y, z and contain numeric data, followed by any additional columns
  - paste the googleSpreadsheetKey into the code, and modify other items mentioned in code comments
-
-- To Do:
-  - decide best way to resize bubbles
-  - add column for bubble color, and corresponding legend?
-  - determine minimal code required for a functional bubble chart template
-  - add function to properly display symbols and commas in financial data ($100,000) - see and credit Andrew? http://projects.ctmirror.org/tools/chart/charts/bubble_schools.html
-  - Highcharts documentation lists various chart types, except bubble chart. Where is best documentation? http://www.highcharts.com/docs/chart-and-series-types/chart-types
+ - bubble size is automatically determined by the data range in column z
+ - the only way to make the bubbles semi-transparent is specify the colors in rgba() model. fillOpacity does not work and nothing else works
 
 ## Credits
-- Thanks @ilyankou for seriesMapping data from Google Sheets
+- Thanks @ilyankou for seriesMapping data from Google Sheets, tooltips, and improving overall code
+- Thanks @andrewbtran at http://TrendCT.org for function to display financial data (with $ and commas)
 
 ## Code resources
 - http://www.highcharts.com/docs/working-with-data/data-module
